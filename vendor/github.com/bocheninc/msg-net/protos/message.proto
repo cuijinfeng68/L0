@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package protos;
+
+message Message {
+    enum Type{
+        UNDEFINED = 0;
+
+        ROUTER_HELLO = 1;
+        ROUTER_HELLO_ACK = 2;
+        ROUTER_CLOSE = 3;
+        ROUTER_GET = 4;
+        ROUTER_GET_ACK = 5;        
+        ROUTER_SYNC = 6;
+
+        PEER_HELLO = 11;
+        PEER_HELLO_ACK = 12;
+        PEER_CLOSE = 13;      
+        PEER_SYNC = 14;
+
+        CHAIN_MESSAGE = 21;
+
+        KEEPALIVE =31;
+        KEEPALIVE_ACK = 32;
+    }
+    Type type = 1;
+    bytes payload = 2;
+    bytes metadata = 3;
+}
+
+message Router {
+    string id = 1;
+    string address = 2;
+}
+
+message Routers {
+    string id = 1;
+    repeated Router routers = 2;
+}
+
+message Peer {
+    string id = 1;
+}
+
+message Peers {
+    string id = 1;
+    repeated Peer peers = 2;
+}
+
+message ChainMessage {
+    string srcId = 1;
+    string dstId = 2;
+    bytes payload = 3;
+    bytes signature = 4;
+}

@@ -1,0 +1,30 @@
+#logger
+logger:
+      level: info #debug、info、warn、error、fatal、panic
+      formatter: text #test、 json
+      out: "./logs" #log directory path, empty will be stderr
+#profiler
+profiler:
+      port: 6060
+#router
+router:
+      id: 0 #identify name
+      address: 0.0.0.0:10580 # server listen address
+      addressAutoDetect: false
+      discovery: # discovery some routers of network, specify ip
+           # - 0.0.0.0:10582
+           # - 0.0.0.0:10584
+      timeout: #sync network, default 5s if not right
+            keepalive: 15s
+            routers: 15s # The duration of time to asks routers for their connected routers
+            network: 
+                  routers: 15s 
+                  peers: 15s 
+      reconnect:
+            interval: 10s
+            max: 5
+
+report:
+      "on": false
+      serverIP: "http://172.31.0.2"
+      interval: 1s

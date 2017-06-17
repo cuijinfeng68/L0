@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package lbft;
+
+message Request {
+    uint32 time = 1;
+    bytes transaction = 2;
+    string fromChain = 3;
+	string toChain = 4;
+    uint32 nonce = 5;
+}
+
+message RequestBatch {
+    uint32 time = 1;
+    repeated Request requests = 2;
+    int64 id = 3;
+}
+
+message PrePrepare {
+    string name = 1;
+    string primaryID = 2; 
+    string chain = 3;
+	string replicaID = 4;
+    uint64 seqNo = 5; 
+    string digest = 6;
+	uint64 quorum = 7;
+    RequestBatch requests = 8;
+}
+
+message Prepare {	
+    string name = 1;
+    string primaryID = 2;  
+    string chain = 3;
+	string replicaID = 4;
+    uint64 seqNo = 5; 
+    string digest = 6;
+	uint64 quorum = 7;
+}
+
+message Commit {
+    string name = 1;
+    string primaryID = 2;  
+	string chain = 3;
+	string replicaID = 4;
+    uint64 seqNo = 5; 
+    string digest = 6;
+	uint64 quorum = 7;
+}
+
+message Committed {
+    string name = 1;
+    string primaryID = 2;  
+    string chain = 3;
+    string replicaID = 4;
+    uint64 seqNo = 5;
+    RequestBatch requestBatch = 6;
+}
+
+message FetchCommitted {
+    string chain = 1;
+    string replicaID = 2;
+    uint64 seqNo = 3;
+}
+
+message ViewChange {
+    string replicaID = 1;
+    string chain = 2;
+    int64 priority = 3;
+    string primaryID = 4;
+    uint64 h = 5;
+}
+
+message NullRequest {
+    string replicaID = 1;
+    string chain = 2;
+    string primaryID = 3;
+    uint64 h = 4;
+}
+
+message Message {
+    oneof payload {
+        RequestBatch requestBatch = 1;
+        PrePrepare prePrepare = 2;
+        Prepare prepare = 3;
+        Commit commit = 4;
+        Committed committed = 5;
+        FetchCommitted fetchCommitted = 6;
+        ViewChange viewchange = 7;
+        NullRequest nullReqest = 8;
+    }
+}

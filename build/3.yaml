@@ -1,0 +1,46 @@
+net:
+  maxPeers: 8
+  bootstrapNodes: ["encode://0459db9f954749751ec6cc0d6e05f4dc33c4ccbb150b1f80270e39371140d772dbbb3910bba7003b874031a468a1de697228af357b4a93420e54e21f03f3c87a67@127.0.0.1:20166"]
+  listenAddr: "127.0.0.1:20168"
+  privatekey: "333c2857d4598e37fb9647507e47a309d6133539bf21a8b9cb6df88fd5232032"
+
+  msgnet:
+    routeAddress: ["127.0.0.1:10001"]
+
+log:
+  level: "info"
+
+jrpc:
+  enabled: true
+  port: "8883"
+
+blockchain:
+  id: "00"
+  datadir: "datadir/3"
+
+issueaddr:
+  addr: ["6ce1bb0858e71b50d603ebe4bec95b11d8833e6d"]
+
+#consensus
+consensus:
+  plugin: "lbft"
+  
+  noops:
+    blockSize: 100
+    blockInterval: 10s
+
+  lbft:
+    id: "ID0003"
+    "N": 4
+    Q: 3
+    K: 100
+    blockSize: 10000000
+    blockTimeout: 8s
+    blockInterval: 10s
+    blockDelay: 10s
+    viewChange: 5s
+    resendViewChange: 5s
+    viewChangePeriod: 0s
+    nullRequest: 5s    
+    bufferSize: 100    
+    maxConcurrentNum: 1

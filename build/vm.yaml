@@ -1,0 +1,17 @@
+VM:
+  RegistrySize: 1024
+
+  CallStackSize: 1024
+
+  # vm maximum memory size (MB)
+  MaxMem: 2
+
+ExecLimit:
+  # max allow exec opcode num
+  MaxOpcodeCount: 10000
+
+  # the contract max run time (millisecond)
+  MaxRunTime: 10000
+
+  # contract script(lua source code) max byte
+  MaxScriptSize: 1024
